@@ -1,0 +1,170 @@
+body {
+    background-image: url('../img/brickwall.png');
+    background-color: #DDD;
+}
+
+h1 {
+    font-family: 'BenchNine', sans-serif;
+}
+
+.title {
+    color: firebrick;
+    font-size: 90px;
+    margin-bottom: 0.3em;
+}
+
+.button {
+    font-family: 'BenchNine', sans-serif;
+    color: white;
+    background-color: firebrick;
+    font-size: 40px;
+    border: none;
+    width: 200px;
+    height: 60px;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+.header {
+    text-align: center;
+}
+
+.tile_container {
+    float: left;
+    width: 80px;
+    height: 80px;
+    position: relative;
+    margin: 2px;
+    -webkit-perspective: 200px;
+       -moz-perspective: 200px;
+         -o-perspective: 200px;
+            perspective: 200px;
+}
+
+.tile {
+    font-family: 'BenchNine', sans-serif;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    -webkit-transition: -webkit-transform 0.4s;
+       -moz-transition: -moz-transform 0.4s;
+        -ms-transition: -ms-transform 0.4s;
+         -o-transition: -o-transform 0.4s;
+            transition: transform 0.4s;
+    -webkit-transform-style: preserve-3d;
+       -moz-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+         -o-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+}
+
+.flipped_tile {
+    -webkit-transform: rotateY( 180deg );
+       -moz-transform: rotateY( 180deg );
+        -ms-transform: rotateY( 180deg );
+         -o-transform: rotateY( 180deg );
+            transform: rotateY( 180deg );
+}
+
+.tile * {
+    display: block;
+    height: 80px;
+    width: 80px;
+    line-height: 80px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 78px;
+    position: absolute;
+    -webkit-backface-visibility: hidden;
+       -moz-backface-visibility: hidden;
+         -o-backface-visibility: hidden;
+            backface-visibility: hidden;
+}
+
+figure {
+    margin: 0;
+}
+
+.back {
+    -webkit-transform: rotateY( 180deg );
+       -moz-transform: rotateY( 180deg );
+        -ms-transform: rotateY( 180deg );
+         -o-transform: rotateY( 180deg );
+            transform: rotateY( 180deg );
+}
+
+.frontside {
+    background: firebrick;
+}
+
+.backside {
+    position: relative;
+    border: 1px solid firebrick;
+    height: 78px;
+    width: 78px;
+    background: white;
+}
+
+.row {
+    clear: both;
+}
+
+/**
+ * Character Colors
+ */
+.one {
+    color: lightblue;
+}
+
+.two {
+    color: green;
+}
+
+.three {
+    color: red;
+}
+
+.four {
+    color: darkblue;
+}
+
+.five {
+    color: brown;
+}
+
+.six .seven .eight {
+    color: aqua;
+}
+
+/**
+ * bomb
+ */
+.bomb_circle {
+  position: absolute;
+  background-color: black;
+  height: 60%;
+  width: 60%;
+  margin-top: 20%;
+  margin-left: 20%;
+  border-radius: 50%;
+}
+
+.bomb_bump {
+  position: absolute;
+  background-color: black;
+  width: 10%;
+  height: 70%;
+  margin-left: 45%;
+  margin-top: 15%;
+}
