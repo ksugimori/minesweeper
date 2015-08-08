@@ -151,7 +151,14 @@ MineSweeper.prototype = {
     },
     
     getTime: function() {
-        //TODO 
+	var elapsedTime = new Date(Date.now() - this.start_time_);
+	var min = elapsedTime.getUTCMinutes();
+	var sec = elapsedTime.getUTCSeconds();
+
+	min = (min < 10) ? '0' + min : min;
+	sec = (sec < 10) ? '0' + sec : sec;
+	
+	return min + ":" + sec;
     },
     
     countNokori: function() {
@@ -236,7 +243,7 @@ MineSweeper.prototype = {
         var tile = this.board_.map_[row][col].tile;
         if (tile.has_mine_) {
             $('.mine').parent('span.tile').addClass('flipped_tile');
-//            alert('You Lose!');
+	    showMessage('You Lose!');
             return;
         } else {
             var tileList = this.board_.open(col, row, []);
@@ -260,13 +267,29 @@ MineSweeper.prototype = {
 /**
  * Common Functions
  */
+var showMessage = function(msg) {
+    $('#msg').html(msg);
+    $('.modal_bg').show();
+    $('.modal_window').show();
+}
+
+var hideMessage = function() {
+    $('.modal_bg').hide();
+    $('.modal_window').hide();
+}
+
 var flip = function(event) {
     var game = event.data.game;
+
+    if (game.countNokori() === game.size_col_ * game.size_row_) {
+	game.start();
+    }
     
     game.open($('.tile').index(this));
     
-    if (game.countNokori() === 10) {
-        alert('You Win!¥nTime: ' + game.getTime());
+    if (game.countNokori() === game.num_mines_) {
+	showMessage('You Win!<br>Clear Time: <span class="cleartime">'
+		    + game.getTime() + "</span>");
     }
 };
 
@@ -274,6 +297,8 @@ var reset = function(event) {
     event.data.game.init();
     $('.flipped_tile').removeClass('flipped_tile');
     $('.tile').bind('click', {game: event.data.game}, flip);
+
+    hideMessage();
 };
 
 /**
@@ -289,4 +314,8 @@ $(document).ready(function() {
 
     $('.tile').bind('click', {game: ms}, flip);
     $('#reset_button').bind('click', {game: ms}, reset);
+    $('.modal_bg').click(hideMessage);
+    $('.modal_window button').click(hideMessage);
+    
+    hideMessage();
 });

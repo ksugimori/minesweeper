@@ -168,3 +168,48 @@ figure {
   margin-left: 45%;
   margin-top: 15%;
 }
+
+/**
+ * Message Box
+ */
+.modal_bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 98;
+    background-color: black;
+    opacity: 0.6;
+    top: 0px;
+    left: 0px;
+}
+
+.modal_window {
+    position: fixed;
+    font-family: 'BenchNine', sans-serif;
+    font-size: 40px;
+    color: #002540;
+    padding: 20px;
+    width: 320px;
+    height: 200px;
+    background-color: #FAF5F3;
+    border: 1px solid black;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    margin: auto;
+    z-index: 99;
+}
+
+.modal_window button {
+    margin-top: 0.5em;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+.modal_window span.cleartime {
+    font-family: 'BenchNine', monospace;
+    color: firebrick;
+    margin-left: 10px;
+}
