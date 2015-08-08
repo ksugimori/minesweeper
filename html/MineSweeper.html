@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- import jQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <head>
+    <!-- import jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    
+    <!-- import webfont -->
+    <link href='https://fonts.googleapis.com/css?family=BenchNine:700' rel='stylesheet' type='text/css'>
+    
+    <meta name="viewport" content="width=960px">
+    <link rel="stylesheet" href="../css/ms.css"/>
+    <!-- import ms.js -->
+    <script src="../js/ms.js"></script>
+    
+    <title>Mine Sweeper</title>
+  </head>
+  
+  <body>
+    <div class="modal_bg"></div>
+    <div class="modal_window">
+      <span id="msg"></span>
+      <button class="button">OK</button>
+    </div>
+      
+    <div class="container">
+      <section class="header">
+        <h1 class="title">Mine Sweeper</h1>
+        <button id="reset_button" class="button">reset</button>
+      </section>
+      
+      <section id="field_area">
+      </section>
+      
+      <section id="footer_area">
         
-        <!-- import webfont -->
-        <link href='https://fonts.googleapis.com/css?family=BenchNine:700' rel='stylesheet' type='text/css'>
-
-        <meta name="viewport" content="width=960px">
-        <link rel="stylesheet" href="../css/ms.css"/>
-        <!-- import ms.js -->
-        <script src="../js/ms.js"></script>
-        
-        <title>Mine Sweeper</title>
-    </head>
-
-    <body>
-        <div class="container">
-            <section class="header">
-                <h1 class="title">Mine Sweeper</h1>
-                <button id="reset_button" class="button">reset</button>
-            </section>
-
-            <section id="field_area">
-            </section>
-
-            <section id="footer_area">
-                 
-            </section>
-        </div>
-    </body>
+      </section>
+    </div>
+  </body>
 </html>
