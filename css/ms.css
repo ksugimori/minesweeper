@@ -179,8 +179,8 @@ figure {
     z-index: 98;
     background-color: black;
     opacity: 0.6;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
 }
 
 .modal_window {
@@ -192,11 +192,10 @@ figure {
     width: 320px;
     height: 200px;
     background-color: #FAF5F3;
-    border: 1px solid black;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     margin: auto;
     z-index: 99;
 }
@@ -208,7 +207,7 @@ figure {
     bottom: 20px;
 }
 
-.modal_window span.cleartime {
+.modal_window .cleartime {
     font-family: 'BenchNine', monospace;
     color: firebrick;
     margin-left: 10px;
