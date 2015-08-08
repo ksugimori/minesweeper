@@ -125,6 +125,7 @@ Board.prototype = {
 function MineSweeper($field, size_col, size_row, num_mines) {
     this.$field_ = $field;
     this.board_ = undefined;
+    this.is_over_ = false;
     
     this.size_col_ = size_col;
     this.size_row_ = size_row;
@@ -138,6 +139,8 @@ MineSweeper.prototype = {
         'four', 'five', 'six', 'seven', 'eight'],
     
     init: function() {
+        this.is_over_ = false;
+        
         this.board_ = new Board(this.size_col_, this.size_row_);
         this.board_.putMines(this.num_mines_);
         this.board_.countUp();
@@ -151,14 +154,14 @@ MineSweeper.prototype = {
     },
     
     getTime: function() {
-	var elapsedTime = new Date(Date.now() - this.start_time_);
-	var min = elapsedTime.getUTCMinutes();
-	var sec = elapsedTime.getUTCSeconds();
+    var elapsedTime = new Date(Date.now() - this.start_time_);
+    var min = elapsedTime.getUTCMinutes();
+    var sec = elapsedTime.getUTCSeconds();
 
-	min = (min < 10) ? '0' + min : min;
-	sec = (sec < 10) ? '0' + sec : sec;
-	
-	return min + ":" + sec;
+    min = (min < 10) ? '0' + min : min;
+    sec = (sec < 10) ? '0' + sec : sec;
+    
+    return min + ":" + sec;
     },
     
     countNokori: function() {
@@ -210,27 +213,27 @@ MineSweeper.prototype = {
                 var selector = '#field_area ' +
                     'ul:nth-child(' + (i+1) + ') ' +
                     'li:nth-child(' + (j+1) + ') ' +
-		    'figure.backside';
+            'figure.backside';
                 
                 var $backface = $(selector);
                 var tile = board.map_[i][j].tile;
                 if (tile.has_mine_) {
-		    $backface.addClass('mine');
-		    
-		    $backface.append("<div class='bomb_bump'></div>");
-		    $backface.append("<div class='bomb_bump'></div>");
-		    $backface.append("<div class='bomb_bump'></div>");
-		    $backface.append("<div class='bomb_bump'></div>");
-		    $backface.append("<div class='bomb_circle'></div>");
-		    
-		    $backface.children("div.bomb_bump:nth-child(1)").css("transform", "rotateZ(45deg)");
-		    $backface.children("div.bomb_bump:nth-child(2)").css("transform", "rotateZ(90deg)");
-		    $backface.children("div.bomb_bump:nth-child(3)").css("transform", "rotateZ(135deg)");
-		    
+            $backface.addClass('mine');
+            
+            $backface.append("<div class='bomb_bump'></div>");
+            $backface.append("<div class='bomb_bump'></div>");
+            $backface.append("<div class='bomb_bump'></div>");
+            $backface.append("<div class='bomb_bump'></div>");
+            $backface.append("<div class='bomb_circle'></div>");
+            
+            $backface.children("div.bomb_bump:nth-child(1)").css("transform", "rotateZ(45deg)");
+            $backface.children("div.bomb_bump:nth-child(2)").css("transform", "rotateZ(90deg)");
+            $backface.children("div.bomb_bump:nth-child(3)").css("transform", "rotateZ(135deg)");
+            
                 } else {
-		    $backface.addClass(this.CLASSES[tile.value_]);
+            $backface.addClass(this.CLASSES[tile.value_]);
                 }
-	    }
+        }
         }
     },
     
@@ -242,9 +245,7 @@ MineSweeper.prototype = {
         
         var tile = this.board_.map_[row][col].tile;
         if (tile.has_mine_) {
-            $('.mine').parent('span.tile').addClass('flipped_tile');
-	    showMessage('You Lose!');
-            return;
+            this.is_over_ = true;
         } else {
             var tileList = this.board_.open(col, row, []);
             
@@ -271,25 +272,32 @@ var showMessage = function(msg) {
     $('#msg').html(msg);
     $('.modal_bg').show();
     $('.modal_window').show();
-}
+};
 
 var hideMessage = function() {
     $('.modal_bg').hide();
     $('.modal_window').hide();
-}
+};
 
 var flip = function(event) {
     var game = event.data.game;
 
+    if (game.is_over_) return;
+
     if (game.countNokori() === game.size_col_ * game.size_row_) {
-	game.start();
+        game.start();
     }
     
     game.open($('.tile').index(this));
-    
-    if (game.countNokori() === game.num_mines_) {
-	showMessage('You Win!<br>Clear Time: <span class="cleartime">'
-		    + game.getTime() + "</span>");
+    if (game.is_over_) {
+        $('.mine').parent('span.tile').addClass('flipped_tile');
+        showMessage('You Lose!');
+    } else {
+        if (game.countNokori() === game.num_mines_) {
+            game.is_over_ = true;
+            showMessage('You Win!<br>Clear Time: <span class="cleartime">'
+                + game.getTime() + "</span>");
+        }
     }
 };
 
